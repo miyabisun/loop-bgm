@@ -18,9 +18,7 @@ tasks =
         .on \close, cb
       subject-path
       |> -> console.info it; it
-      |> browserify _, do
-        extensions: <[js ls]>
-        debug: yes
+      |> browserify _, extensions: <[js ls]>
       |> (.transform lsify, header: yes, const: no)
       |> (.bundle!)
       |> (.pipe file)
