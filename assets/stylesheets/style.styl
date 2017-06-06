@@ -1,0 +1,142 @@
+.audio-analyzer
+  position: relative
+  width: w = 1000px
+  height: h = 150px
+  border: 1px solid #444
+  padding-bottom: pb = 20px
+  padding-left: pl = 30px
+  .line_0
+    position: absolute
+    top: (h / 2)
+    left: pl
+    width: w
+    border-top: 1px solid #444
+  .line_-1
+    position: absolute
+    top: h
+    left: 0px
+    border-top: 1px solid #444
+    width: (w + pl)
+  .layer-label
+    position: absolute
+    left: 0px
+    width: pl - 2px
+    text-align: right
+    font-size: 10px
+  .time-label
+    position: absolute
+    top: 0px
+    left: pl
+    height: (h + pb)
+    border-left: 1px solid #ccc
+    &.just
+      border-left: 1px solid #666
+    label
+      position: absolute
+      top: h + 2px
+      left: 5px
+      font-size: 10px
+  .loop-start
+    position: absolute
+    top: 0px
+    left: pl
+    height: h
+    border-right: 1px solid #4c8
+  .loop-end
+    position: absolute
+    top: 0px
+    right: 0px
+    height: h
+    border-left: 1px solid #4c8
+  .current-time
+    position: absolute
+    top: 0px
+    left: pl
+    height: h
+    border-left: 1px solid #F44
+  .panel
+    position: absolute
+    top: 0px
+    left: pl
+    width: w
+    height: h
+
+.loop-button
+  display: inline-block
+  background-image: url(/img/spinner.svg)
+  background-clip: border-box
+  background-size: 50% 50%
+  background-repeat: no-repeat
+  background-position: 50% 50%
+  width: 30px
+  height: 30px
+  border: 1px solid #666
+  border-radius: 8px
+
+.loop-setting
+  .display
+    position: relative
+    width: w = 500px
+    height: (h = 100px) + (pb = 20px)
+    padding-left: pl = 30px
+    border: 1px solid #444
+    .line_0
+      position: absolute
+      top: (h / 2)
+      left: pl
+      border-top: 1px solid #444
+      width: w
+    .line_-1
+      position: absolute
+      top: h
+      left: 0px
+      border-top: 1px solid #444
+      width: w + pl
+    .layer-label
+      position: absolute
+      left: 0px
+      width: pl - 2px
+      text-align: right
+      font-size: 10px
+    .time_0
+      position: absolute
+      top: 0px
+      left: pl
+      height: (h + pb)
+      border-left: 1px solid #666
+    .wave-panel
+      position: relative
+      width: w
+      height: (h + pb)
+      overflow: hidden
+      .slide
+        position: absolute
+        left: (w / 2)
+        transform-origin: 0 0
+        .time-label
+          position: absolute
+          top: 0px
+          height: h
+          border-left: 1px solid #ccc
+          &.just
+            border-left: 1px solid #666
+          label
+            position: absolute
+            top: h + 2px
+            left: 5px
+            font-size: 10px
+        .current-time
+          position: absolute
+          top: 0px
+          height: h
+          border-left: 1px solid #F44
+    .center-line
+      position: absolute
+      top: 0px
+      left: (pl + w / 2)
+      height: h + pb
+      border-left: 1px solid #4c8
+
+svg.wave
+  transform-origin: 0 0
+

@@ -1,20 +1,36 @@
 {
   "name": "loop-bgm",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run jade && npm run lsc",
-    "jade": "jade -o dist/ src/templates/*.jade",
-    "lsc": "lsc -o dist/js/ src/scripts/*.ls",
-    "pages": "git write-tree --prefix=build/gh-pages",
-    "commit": "git commit-tree -p gh-pages",
+    "start": "lsc bin/serve.ls",
+    "build": "lsc bin/build.ls",
+    "check": "lsc bin/check.ls",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["loop-bgm"],
+  "author": "miyabi-sun",
   "license": "ISC",
   "devDependencies": {
-    "livescript": "^1.5.0"
-  }
+    "async": "^2.4.1",
+    "browserify": "^14.3.0",
+    "browserify-livescript": "^0.2.3",
+    "copy": "^0.3.0",
+    "del": "^2.2.2",
+    "express": "^4.15.3",
+    "livescript": "^1.5.0",
+    "lsify": "^0.3.1",
+    "lsx-pug": "^0.1.49",
+    "prelude-ls": "^1.1.2",
+    "pug": "^2.0.0-rc.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "readdir-recursive": "0.0.4",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "stylus": "^0.54.5"
+  },
+  "dependencies": {}
 }

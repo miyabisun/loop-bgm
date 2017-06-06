@@ -1,0 +1,162 @@
+.audio-analyzer {
+  position: relative;
+  width: 1000px;
+  height: 150px;
+  border: 1px solid #444;
+  padding-bottom: 20px;
+  padding-left: 30px;
+}
+.audio-analyzer .line_0 {
+  position: absolute;
+  top: 75px;
+  left: 30px;
+  width: 1000px;
+  border-top: 1px solid #444;
+}
+.audio-analyzer .line_-1 {
+  position: absolute;
+  top: 150px;
+  left: 0px;
+  border-top: 1px solid #444;
+  width: 1030px;
+}
+.audio-analyzer .layer-label {
+  position: absolute;
+  left: 0px;
+  width: 28px;
+  text-align: right;
+  font-size: 10px;
+}
+.audio-analyzer .time-label {
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  height: 170px;
+  border-left: 1px solid #ccc;
+}
+.audio-analyzer .time-label.just {
+  border-left: 1px solid #666;
+}
+.audio-analyzer .time-label label {
+  position: absolute;
+  top: 152px;
+  left: 5px;
+  font-size: 10px;
+}
+.audio-analyzer .loop-start {
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  height: 150px;
+  border-right: 1px solid #4c8;
+}
+.audio-analyzer .loop-end {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 150px;
+  border-left: 1px solid #4c8;
+}
+.audio-analyzer .current-time {
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  height: 150px;
+  border-left: 1px solid #f44;
+}
+.audio-analyzer .panel {
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  width: 1000px;
+  height: 150px;
+}
+.loop-button {
+  display: inline-block;
+  background-image: url("/img/spinner.svg");
+  background-clip: border-box;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #666;
+  border-radius: 8px;
+}
+.loop-setting .display {
+  position: relative;
+  width: 500px;
+  height: 120px;
+  padding-left: 30px;
+  border: 1px solid #444;
+}
+.loop-setting .display .line_0 {
+  position: absolute;
+  top: 50px;
+  left: 30px;
+  border-top: 1px solid #444;
+  width: 500px;
+}
+.loop-setting .display .line_-1 {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  border-top: 1px solid #444;
+  width: 530px;
+}
+.loop-setting .display .layer-label {
+  position: absolute;
+  left: 0px;
+  width: 28px;
+  text-align: right;
+  font-size: 10px;
+}
+.loop-setting .display .time_0 {
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  height: 120px;
+  border-left: 1px solid #666;
+}
+.loop-setting .display .wave-panel {
+  position: relative;
+  width: 500px;
+  height: 120px;
+  overflow: hidden;
+}
+.loop-setting .display .wave-panel .slide {
+  position: absolute;
+  left: 250px;
+  transform-origin: 0 0;
+}
+.loop-setting .display .wave-panel .slide .time-label {
+  position: absolute;
+  top: 0px;
+  height: 100px;
+  border-left: 1px solid #ccc;
+}
+.loop-setting .display .wave-panel .slide .time-label.just {
+  border-left: 1px solid #666;
+}
+.loop-setting .display .wave-panel .slide .time-label label {
+  position: absolute;
+  top: 102px;
+  left: 5px;
+  font-size: 10px;
+}
+.loop-setting .display .wave-panel .slide .current-time {
+  position: absolute;
+  top: 0px;
+  height: 100px;
+  border-left: 1px solid #f44;
+}
+.loop-setting .display .center-line {
+  position: absolute;
+  top: 0px;
+  left: 280px;
+  height: 120px;
+  border-left: 1px solid #4c8;
+}
+svg.wave {
+  transform-origin: 0 0;
+}
