@@ -1,12 +1,10 @@
 require! {
+  \prelude-ls : {round}
   \react-redux : {connect}
-  \../components/Audio.ls
-  \../actions.ls : {set-music, set-wave, set-time}
+  \../components/AudioFile.ls
+  \../actions.ls : {set-context, set-audio-buffer, set-music, set-wave, set-time}
 }
 AudioContext = window.AudioContext or window.webkitAudioContext
-
-map-state-to-props = ({file}:state)->
-  d: file.d
 
 map-dispatch-to-props = (dispatch)->
   on-change: (file)->
@@ -16,9 +14,11 @@ map-dispatch-to-props = (dispatch)->
         context = new AudioContext
         array-buffer = reader.result
         audio-buffer <~ context.decode-audio-data array-buffer
+        dispatch set-context context
+        dispatch set-audio-buffer audio-buffer
         dispatch set-wave audio-buffer
-        audio-buffer.length / audio-buffer.sample-rate * 1000 |> parse-int |> (* 0.001) |> set-time |> dispatch
+        dispatch <| set-time <| audio-buffer.length / audio-buffer.sample-rate * 1000 |> round |> (* 0.001)
       ..read-as-array-buffer file
 
-module.exports = connect(map-state-to-props, map-dispatch-to-props) Audio
+module.exports = connect null, map-dispatch-to-props <| AudioFile
 

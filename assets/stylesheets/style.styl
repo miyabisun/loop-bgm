@@ -1,10 +1,30 @@
-.audio-analyzer
+.audio
+  min-width: 1100px
+  padding: 10px 20px
+  input[type="file"]
+    width: 100%
+
+.audio-controller
+  padding: 5px 0
+  .current-time
+    width: 100px
+
+.audio-display
   position: relative
   width: w = 1000px
   height: h = 150px
   border: 1px solid #444
   padding-bottom: pb = 20px
   padding-left: pl = 30px
+  overflow: hidden
+  &.disabled
+    border: #eee 1px solid
+    background: #f6f6f6
+    box-shadow: none
+    text-shadow: none
+    color: #ccc
+    cursor: default
+    outline: none
   .line_0
     position: absolute
     top: (h / 2)
@@ -61,23 +81,15 @@
     width: w
     height: h
 
-.loop-button
-  display: inline-block
-  background-image: url(/img/spinner.svg)
-  background-clip: border-box
-  background-size: 50% 50%
-  background-repeat: no-repeat
-  background-position: 50% 50%
-  width: 30px
-  height: 30px
-  border: 1px solid #666
-  border-radius: 8px
-
-.loop-setting
+.analyzer
+  margin-top: 10px
+  min-width: 1100px
+  padding: 10px 20px
   .display
     position: relative
+    margin: 10px
     width: w = 500px
-    height: (h = 100px) + (pb = 20px)
+    height: (h = 120px) + (pb = 20px)
     padding-left: pl = 30px
     border: 1px solid #444
     .line_0

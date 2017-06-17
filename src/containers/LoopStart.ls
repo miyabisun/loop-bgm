@@ -1,21 +1,25 @@
 require! {
   \react-redux : {connect}
   \../components/LoopSetting.ls
-  \../actions.ls : {set-loop-start: set-loop, to-time}
+  \../actions.ls : {set-loop-start: set-loop, set-loop-start-sample: set-loop-sample, to-time}
 }
 
-map-state-to-props = ({file, player}:state)->
-  name: \LoopStart
-  loop-time: player.loop-start or 0
-  current-time: player.current-time or 0
+map-state-to-props = ({player, analyzer}:state)->
+  name: \loop-start
+  loop-time: analyzer.loop-start or 0
+  loop-sample: analyzer.loop-start-sample or 0
   time: player.time or 0
-  d: file.d or []
+  samples: analyzer.audio-buffer?.length or 0
+  current-time: player.current-time or 0
+  d: analyzer.d or []
 
 map-dispatch-to-props = (dispatch)->
-  on-change: (time)->
+  on-change-time: (time)->
     dispatch set-loop time
+  on-change-sample: (sample)->
+    dispatch set-loop-sample sample
   to-time: (time)->
     dispatch to-time time
 
-module.exports = connect(map-state-to-props, map-dispatch-to-props) LoopSetting
+module.exports = connect map-state-to-props, map-dispatch-to-props <| LoopSetting
 
