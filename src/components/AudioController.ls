@@ -49,6 +49,13 @@ AudioController = ({src, is-playing, is-muted, volume, current-time, time, on-pl
             e.prevent-default!
             set-volume value
       dom ToolbarGroup, last-child: yes,
+        dom IconButton,
+          icon-class-name: \material-icons
+          disabled: not src
+          onTouchTap: (e)->
+            e.prevent-default!
+            toggle-mute!
+          \info
         dom TextField,
           class-name: \current-time
           value: current-time

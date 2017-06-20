@@ -16,9 +16,9 @@ LoopPlayer = ({sound, start, stop, search, test, dual-test, download}:state)->
         \search
       dom IconButton,
         icon-class-name: \material-icons
-        tooltip: "dual play test"
+        tooltip: "dual play test (start, end)"
         tooltip-position: \bottom-center
-        disabled: not sound or yes
+        disabled: not sound
         onTouchTap: -> dual-test state
         \call_merge
       dom IconButton,

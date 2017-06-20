@@ -8,8 +8,9 @@ require! {
   \./components/App.ls
 }
 
-store = create-store root-reducer, apply-middleware ReduxThunk
-window <<< {store}
+window <<<
+  store: (store = create-store root-reducer, apply-middleware ReduxThunk)
+  state:~ -> window.store.get-state!
 dom Provider, {store}, dom App
 |> render _, document.get-element-by-id \root
 

@@ -24,6 +24,7 @@ LoopSetting = ({name, loop-time, loop-sample, time, samples, current-time, d, on
           on-change: (e)!-> on-change-time minimum [e.target.value |> parse-float |> (or 0), time]
           full-width: yes
           underline-show: no
+          disabled: time is 0
         dom Divider
         dom TextField,
           floating-label-text: "#{name}-sample"
@@ -35,6 +36,7 @@ LoopSetting = ({name, loop-time, loop-sample, time, samples, current-time, d, on
           on-change: (e)!-> on-change-sample minimum [e.target.value |> parse-int, samples]
           full-width: yes
           underline-show: no
+          disabled: samples is 0
     dom GridTile,
       cols: 2
       dom \div, class-name: \display,
