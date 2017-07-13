@@ -1,6 +1,7 @@
 module.exports =
   # action creators: file
   set-music: (file)-> {type: \SET_MUSIC, file}
+  set-metadata: (metadata)-> {type: \SET_METADATA, metadata}
 
   # action creators: player
   set-time: (time)-> {type: \SET_TIME, time}

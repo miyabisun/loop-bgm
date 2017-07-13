@@ -1,5 +1,5 @@
 require! {
-  \prelude-ls : {round, maximum, map, find, filter, sort-with, flatten, obj-to-pairs}
+  \prelude-ls : {round, abs, maximum, minimum, each, map, find, filter, sort-with, flatten, obj-to-pairs}
 }
 Audio = -> document.query-selector \audio
 request-frame = window.request-idle-callback or window.request-animation-frame
@@ -20,13 +20,13 @@ module.exports = (state = {}, action)->
     d = []
     {{sample-rate}:audio-buffer, height} = action
     render-rate = (state.render-rate or 20ms) * 0.001 * sample-rate
-    (data = audio-buffer.get-channel-data 0)
-      .for-each (datum, index)->
-        unless index % render-rate is 0 => return
-        if index is 0 => d.push "M0 500"; return
-        x = index / render-rate |> round
-        y = (1 - datum) / 2 * height |> round
-        d.push "L#x #y"
+    data = audio-buffer.get-channel-data 0
+    [0 to data.length by render-rate] |> each (index)->
+      if index is 0 => d.push "M0 500"; return
+      chunk = data.slice index, index + render-rate
+      x = index / render-rate |> round
+      d.push "L#x #{(1 - maximum chunk) / 2 * height |> round}"
+      d.push "L#x #{(1 - minimum chunk) / 2 * height |> round}"
     {} <<< state <<< {d}
   | \SET_D => {} <<< state <<< {action.d}
   | \SET_LOOP_START =>

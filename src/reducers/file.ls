@@ -7,5 +7,6 @@ module.exports = (state = {}, action)->
     {} <<< state <<<
       file: action.file
       src: url.create-object-URL action.file
+  | \SET_METADATA => {} <<< state <<< {action.metadata}
   | _ => state
 

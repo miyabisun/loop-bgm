@@ -49,7 +49,7 @@ LoopPlayer = ({sound, start, stop, search, test, dual-test, download}:state)->
         icon-class-name: \material-icons
         tooltip: "download Ogg file"
         tooltip-position: \bottom-center
-        disabled: not sound or yes
+        disabled: not sound
         onTouchTap: -> download state
         \file_download
 

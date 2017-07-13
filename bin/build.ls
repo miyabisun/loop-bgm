@@ -14,14 +14,23 @@ tasks =
     fs.mkdir-sync "#__dirname/../docs/js"
     readdir-recursive.file-sync "#__dirname/../assets/scripts/"
     |> map (subject-path, cb)-->
-      file = fs.create-write-stream "#__dirname/../docs/js#{subject-path - /.*assets\/scripts/ |> (.replace /\.ls$/, \.js)}"
-        .on \close, cb
-      subject-path
-      |> -> console.info it; it
-      |> browserify _, extensions: <[js ls]>
-      |> (.transform lsify, header: yes, const: no)
-      |> (.bundle!)
-      |> (.pipe file)
+      switch
+      | subject-path is /\.js$/ =>
+        dist = fs.create-write-stream "#__dirname/../docs/js#{subject-path - /.*assets\/scripts/}"
+          .on \close, cb
+        subject-path
+        |> -> console.info it; it
+        |> fs.create-read-stream _
+        |> (.pipe dist)
+      | subject-path is /\.ls$/ =>
+        dist = fs.create-write-stream "#__dirname/../docs/js#{subject-path - /.*assets\/scripts/ |> (.replace /\.ls$/, \.js)}"
+          .on \close, cb
+        subject-path
+        |> -> console.info it; it
+        |> browserify _, extensions: <[js ls]>
+        |> (.transform lsify, header: yes, const: no)
+        |> (.bundle!)
+        |> (.pipe dist)
     |> async.series _, done
   templates: (done)->
     console.info "templates!"

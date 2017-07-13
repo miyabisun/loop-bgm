@@ -1,8 +1,10 @@
 require! {
-  \prelude-ls : {maximum}
+  \prelude-ls : {each, map, maximum, Obj}
   \react-redux : {connect}
   \../components/LoopPlayer.ls
   \../actions.ls : {start, stop, search-loop, test}
+  \file-saver : {save-as}
+  \vorbis-encoder-js : {encoder: Encoder}
 }
 Audio = -> document.query-selector \audio or {}
 
@@ -51,9 +53,19 @@ map-dispatch-to-props = (dispatch)->
     left-node.start 0, (analyzer.loop-start - 1s), 5s
     right-node.start 0, (analyzer.loop-end - 1s), 5s
   search: -> dispatch search-loop!
-  download: ({analyzer, file})->
-    #TODO:create download method
-    console.warning \todo:create_download_method
-
+  download: ({{audio-buffer, loop-start-sample, loop-end-sample}:analyzer, {file: music, metadata}:file})->
+    tags = Obj.compact do
+      ALBUM: metadata.album
+      ARTIST: metadata.artist?.0
+      DISCNUMBER: metadata.disk?.of
+      TITLE: metadata.title
+      TRACKNUMBER: metadata.track?.no
+      GENRE: metadata.genre?.0
+      DATE: that - /T.*$/ if metadata.year
+      LOOPSTART: loop-start-sample
+      LOOPLENGTH:  loop-end-sample - loop-start-sample
+    encoder = new Encoder audio-buffer.sample-rate, audio-buffer.number-of-channels, 0.4, tags
+    encoder.encode-from audio-buffer
+    save-as encoder.finish!, (music.name.replace /[^.]*$/, \ogg)
 module.exports = connect map-state-to-props, map-dispatch-to-props <| LoopPlayer
 

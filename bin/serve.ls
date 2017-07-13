@@ -9,14 +9,20 @@ app = express!
     res.set \Content-Type, \text/javascript
     req.path
     |> (- /^\/js/)
-    |> (.replace /\.js/, \.ls)
     |> -> "#__dirname/../assets/scripts#it"
-    |> browserify _, do
-      extensions: <[js ls]>
-      debug: yes
-    |> (.transform lsify, header: yes, const: no)
-    |> (.bundle!)
-    |> (.pipe res)
+    |> ->
+      switch
+      | fs.exists-sync it =>
+        fs.create-read-stream it .pipe res
+      | _ =>
+        it
+        |> (.replace /\.js/, \.ls)
+        |> browserify _, do
+          extensions: <[js ls]>
+          debug: yes
+        |> (.transform lsify, header: yes, const: no)
+        |> (.bundle!)
+        |> (.pipe res)
   ..get \/css/*, (req, res)->
     res.set \Content-Type, \text/css
     file-path = req.path
